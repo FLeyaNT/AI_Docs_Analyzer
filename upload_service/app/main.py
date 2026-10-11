@@ -4,9 +4,9 @@ import uvicorn
 
 from fastapi.responses import HTMLResponse
 
-from create_app import create_app
-from core.config import settings
-from api.v1.api import router_v1
+from app.create_app import create_app
+from app.core.config import settings
+from app.api.api import router_v1
 
 
 logging.basicConfig(
@@ -23,7 +23,7 @@ app.include_router(
 
 
 @app.get("/")
-async def main():
+async def files():
     content = """
 <body>
 <form action="api/v1/upload/files/" enctype="multipart/form-data" method="post">
@@ -37,8 +37,9 @@ async def main():
 
 if __name__ == '__main__':
     uvicorn.run(
-        app='main:app',
+        app='app.main:app',
         host=settings.run.host,
         port=settings.run.port,
-        reload=settings.run.reload
+        reload=settings.run.reload,
+        reload_dirs=['app']
     )

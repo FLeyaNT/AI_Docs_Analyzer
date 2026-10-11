@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  rabbit:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbit
+    hostname: rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: secret_pass
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_log:/var/log/rabbitmq
+      - ./configs/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:

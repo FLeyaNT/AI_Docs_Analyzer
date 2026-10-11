@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .endpoints import upload
+from app.api.endpoints import upload
 
 
 router_v1 = APIRouter(
